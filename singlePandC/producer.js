@@ -10,8 +10,8 @@ async function sendMesg(msg) {
 
     await channel.assertExchange(exchange, 'direct', { durable: false });//durable means should it be persit if connection lost
 
-    await channel.assertQueue('mail_queue', { exclusive: false });//initialize Queue
-    await channel.bindQueue('mail_queue', exchange, routingKey);// bind queue with exchange and routing key
+    await channel.assertQueue(queue, { exclusive: false });//initialize Queue
+    await channel.bindQueue(queue, exchange, routingKey);// bind queue with exchange and routing key
 
     channel.publish(exchange, routingKey, Buffer.from(JSON.stringify(msg)));
 
